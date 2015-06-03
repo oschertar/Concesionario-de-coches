@@ -1,55 +1,141 @@
-package pgn.examenMarzo.concesionarioCoches;
+/**
+ * Paquete que contiene los archivos del programa
+ */
+package concesionarioCoches;
 
+import java.io.Serializable;
+/**
+ * Importación de la clase Pattern
+ */
 import java.util.regex.Pattern;
 
-public class Coche {
+/**
+ * Clase que contiene toda la información y las acciones de los coches
+ * 
+ * @author Óscar Heredia Tartajo
+ * @version 1.0
+ *
+ */
+public class Coche implements Serializable{
+	/**
+	 * Cadena donde se guardara la matricula
+	 */
 	private String matricula;
+	/**
+	 * Variable donde se guarda el color del coche
+	 */
 	private Color color;
+	/**
+	 * Variable donde se guarda el tipo de modelo del coche
+	 */
 	private Modelo modelo;
+	/**
+	 * Patron que verifica si la matricula introducida es valida o no
+	 */
 	static final private Pattern patternMatricula = Pattern
-			.compile("^\\d{4}[ -]?[[B-Z]&&[^QEIOU]]{3}$");
+			.compile("^(\\d){4}[ -]?[[B-Z]&&[^QEIOU]]{3}$");
 
-	private Coche(String matricula, Color color, Modelo modelo) {
+	/**
+	 * Constructor coche completo
+	 * 
+	 * @param matricula
+	 *            matricula introducida por teclado
+	 * @param color
+	 *            color seleccionado del menu
+	 * @param modelo
+	 *            modelo seleccionado del menu
+	 * @throws MatriculaNoValodaException
+	 * @throws ColorNoValidoException
+	 * @throws ModeloNoValidoException
+	 */
+	Coche(String matricula, Color color, Modelo modelo)
+			throws MatriculaNoValodaException, ColorNoValidoException,
+			ModeloNoValidoException {
 		super();
 		setMatricula(matricula);
 		setColor(color);
 		setModelo(modelo);
 	}
 
-	private Coche(String matricula) {
+	/**
+	 * Constructor coche , solo matricula
+	 * 
+	 * @param matricula
+	 *            matricula introducida por teclado
+	 * @throws MatriculaNoValodaException
+	 */
+	Coche(String matricula) throws MatriculaNoValodaException {
 		setMatricula(matricula);
 	}
 
-	static Coche instanciarCoche(String matricula, Color color, Modelo modelo) {
-		if (esValida(matricula) && color != null && modelo != null)
-			return new Coche(matricula, color, modelo);
-		return null;
-	}
-
-	static Coche instanciarCoche(String matricula) {
-		if (esValida(matricula))
-			return new Coche(matricula);
-		return null;
-	}
-
+	/**
+	 * Metodo que valida una matricula introducida
+	 * 
+	 * @param matricula
+	 *            matricula introducida por teclado
+	 * @return devuelve true si es válida la matricula o false si no es válida
+	 */
 	private static boolean esValida(String matricula) {
 		return patternMatricula.matcher(matricula).matches();
 	}
 
-	private void setMatricula(String matricula) {
-		this.matricula = matricula;
+	/**
+	 * Metodo set de la matrícula
+	 * 
+	 * @param matricula
+	 *            matrícula del coche
+	 * @throws MatriculaNoValodaException
+	 *             excepción que salta cuando la matrícula no sea válida
+	 *             siguiendo el patrón
+	 */
+	private void setMatricula(String matricula)
+			throws MatriculaNoValodaException {
+		if (esValida(matricula))
+			this.matricula = matricula;
+		else
+			throw new MatriculaNoValodaException("La matrícula no es válida");
+
 	}
 
+	/**
+	 * Metodo get del campo color
+	 * 
+	 * @return devuelve un color
+	 */
 	Color getColor() {
 		return color;
 	}
 
-	private void setColor(Color color) {
-		this.color = color;
+	/**
+	 * Metodo set del campo color
+	 * 
+	 * @param color
+	 *            color del coche
+	 * @throws ColorNoValidoException
+	 *             Excepción que salta cuando el color para asignar sea null
+	 */
+	private void setColor(Color color) throws ColorNoValidoException {
+		if (color != null)
+			this.color = color;
+		else
+			throw new ColorNoValidoException("El color no es válido");
+
 	}
 
-	private void setModelo(Modelo modelo) {
-		this.modelo = modelo;
+	/**
+	 * Metodo set del campo modelo
+	 * 
+	 * @param modelo
+	 *            modelo del coche
+	 * @throws ModeloNoValidoException
+	 *             Excepción que salta cuando el modelo para asignar sea null
+	 */
+	private void setModelo(Modelo modelo) throws ModeloNoValidoException {
+		if (modelo != null)
+			this.modelo = modelo;
+		else
+			throw new ModeloNoValidoException("El modelo no es válido");
+
 	}
 
 	/*
