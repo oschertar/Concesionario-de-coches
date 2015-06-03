@@ -32,7 +32,7 @@ public class Coche implements Serializable{
 	/**
 	 * Patron que verifica si la matricula introducida es valida o no
 	 */
-	static final private Pattern patternMatricula = Pattern
+	public static final Pattern patternMatricula = Pattern
 			.compile("^(\\d){4}[ -]?[[B-Z]&&[^QEIOU]]{3}$");
 
 	/**
@@ -44,12 +44,12 @@ public class Coche implements Serializable{
 	 *            color seleccionado del menu
 	 * @param modelo
 	 *            modelo seleccionado del menu
-	 * @throws MatriculaNoValodaException
+	 * @throws MatriculaNoValidaException
 	 * @throws ColorNoValidoException
 	 * @throws ModeloNoValidoException
 	 */
 	Coche(String matricula, Color color, Modelo modelo)
-			throws MatriculaNoValodaException, ColorNoValidoException,
+			throws MatriculaNoValidaException, ColorNoValidoException,
 			ModeloNoValidoException {
 		super();
 		setMatricula(matricula);
@@ -62,9 +62,9 @@ public class Coche implements Serializable{
 	 * 
 	 * @param matricula
 	 *            matricula introducida por teclado
-	 * @throws MatriculaNoValodaException
+	 * @throws MatriculaNoValidaException
 	 */
-	Coche(String matricula) throws MatriculaNoValodaException {
+	Coche(String matricula) throws MatriculaNoValidaException {
 		setMatricula(matricula);
 	}
 
@@ -75,7 +75,7 @@ public class Coche implements Serializable{
 	 *            matricula introducida por teclado
 	 * @return devuelve true si es válida la matricula o false si no es válida
 	 */
-	private static boolean esValida(String matricula) {
+	public static boolean esValida(String matricula) {
 		return patternMatricula.matcher(matricula).matches();
 	}
 
@@ -84,16 +84,16 @@ public class Coche implements Serializable{
 	 * 
 	 * @param matricula
 	 *            matrícula del coche
-	 * @throws MatriculaNoValodaException
+	 * @throws MatriculaNoValidaException
 	 *             excepción que salta cuando la matrícula no sea válida
 	 *             siguiendo el patrón
 	 */
 	private void setMatricula(String matricula)
-			throws MatriculaNoValodaException {
+			throws MatriculaNoValidaException {
 		if (esValida(matricula))
 			this.matricula = matricula;
 		else
-			throw new MatriculaNoValodaException("La matrícula no es válida");
+			throw new MatriculaNoValidaException("La matrícula no es válida");
 
 	}
 
@@ -102,7 +102,7 @@ public class Coche implements Serializable{
 	 * 
 	 * @return devuelve un color
 	 */
-	Color getColor() {
+	public Color getColor() {
 		return color;
 	}
 
@@ -183,6 +183,14 @@ public class Coche implements Serializable{
 	public String toString() {
 		return "\nCoche [matricula=" + matricula + ", color=" + color
 				+ ", modelo=" + modelo + "]";
+	}
+
+	public Modelo getModelo() {
+		return modelo;
+	}
+	
+	public String getMatricula() {
+		return matricula;
 	}
 
 }

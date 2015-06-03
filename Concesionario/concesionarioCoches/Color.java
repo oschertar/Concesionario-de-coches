@@ -3,7 +3,7 @@
  */
 package concesionarioCoches;
 
-
+//import pgn.examenMarzo.utiles.Menu;
 
 /**
  * Enum que contiene una lista de colores y los metodos necesarios para mostrarlos y elegir uno de ellos
@@ -13,18 +13,8 @@ package concesionarioCoches;
  * 
  */
 public enum Color {
-	/**
-	 * Color plata
-	 */
-	PLATA,
-	/**
-	 * Color rojo
-	 */
-	ROJO, 
-	/**
-	 * Color Azul
-	 */
-	AZUL;
+	
+	PLATA, ROJO, AZUL;
 	/**
 	 * Array que contiene el número de colores que tiene la enum
 	 */

@@ -29,7 +29,7 @@ public class Concesionario implements Serializable{
 	/**
 	 * Lista de coches parametrizada de tipo coche
 	 */
-	private ArrayList<Coche> almacen = new ArrayList<Coche>();
+	public ArrayList<Coche> almacen = new ArrayList<Coche>();
 	/**
 	 * Nombre del concesionario
 	 */
@@ -48,11 +48,11 @@ public class Concesionario implements Serializable{
 	 *         añadirse
 	 * @throws ModeloNoValidoException
 	 * @throws ColorNoValidoException
-	 * @throws MatriculaNoValodaException
+	 * @throws MatriculaNoValidaException
 	 * @throws CocheYaExistenteException
 	 */
-	boolean annadir(String matricula, Color color, Modelo modelo)
-			throws MatriculaNoValodaException, ColorNoValidoException,
+	public boolean annadir(String matricula, Color color, Modelo modelo)
+			throws MatriculaNoValidaException, ColorNoValidoException,
 			ModeloNoValidoException, CocheYaExistenteException {
 		Coche coche = new Coche(matricula, color, modelo);
 		if (almacen.contains(coche))
@@ -82,10 +82,10 @@ public class Concesionario implements Serializable{
 	 *            matricula del coche a eliminar
 	 * @return devuelve true si el coche se elimino y false si no se pudo
 	 *         eliminar
-	 * @throws MatriculaNoValodaException
+	 * @throws MatriculaNoValidaException
 	 * @throws CocheNoExistenteException
 	 */
-	boolean eliminar(String matricula) throws MatriculaNoValodaException,
+	public boolean eliminar(String matricula) throws MatriculaNoValidaException,
 			CocheNoExistenteException {
 		Coche coche = new Coche(matricula);
 		if (almacen.contains(coche)){
@@ -101,7 +101,7 @@ public class Concesionario implements Serializable{
 	 * 
 	 * @return el tamaño de la lista con un int
 	 */
-	int size() {
+	public int size() {
 		return almacen.size();
 	}
 
@@ -111,10 +111,10 @@ public class Concesionario implements Serializable{
 	 * @param matricula
 	 *            matricula del coche a buscar
 	 * @return Coche contenido en el almacén. null si no existe
-	 * @throws MatriculaNoValodaException
+	 * @throws MatriculaNoValidaException
 	 * @throws CocheNoExistenteException
 	 */
-	Coche get(String matricula) throws MatriculaNoValodaException,
+	public Coche get(String matricula) throws MatriculaNoValidaException,
 			CocheNoExistenteException {
 		Coche coche = new Coche(matricula);
 		int index = almacen.indexOf(coche);
@@ -123,6 +123,14 @@ public class Concesionario implements Serializable{
 		}
 		throw new CocheNoExistenteException("El coche no existe");
 	}
+	
+	public Coche get(int index) {
+		if(almacen.isEmpty() | index <0 | index>almacen.size()-1)
+			return null;
+	return almacen.get(index);
+
+
+}
 
 	/*
 	 * (non-Javadoc)
