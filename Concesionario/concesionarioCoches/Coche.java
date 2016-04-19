@@ -1,5 +1,8 @@
 /**
  * Paquete que contiene los archivos del programa
+ *
+ *@author Isabel María Gómez Palomeque
+ *@version 2.0
  */
 package concesionarioCoches;
 
